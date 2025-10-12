@@ -97,11 +97,8 @@ Recurrence: {recurrence_rule or 'None'}
 
     try:
         event = service.events().insert(calendarId=CAL_ID, body=event_body).execute()
-        # SUCCESS: Return a helpful message with the link
         return f"Event '{event.get('summary')}' successfully created. Check link: {event.get('htmlLink')}"
     except HttpError as error:
-        # **CRUCIAL FIX:** Return the detailed error content from the API.
-        # This allows the LLM to read the reason (e.g., 'Invalid date format').
         return f"API FAILURE (HTTP {error.resp.status}): {error.content.decode()}"
 
 
@@ -237,6 +234,4 @@ def get_current_datetime() -> str:
 
 
 if __name__ == '__main__':
-  # print(list_all_calendars())
-  print(find_and_delete_events_by_summary("supo"))
-  print(get_current_datetime())
+  print(list_all_calendars())
