@@ -158,7 +158,6 @@ def find_and_delete_events_by_summary(
             master_id = event.get('recurringEventId') or event.get('id')
 
             if master_id not in master_ids_deleted:
-                delete_event_by_id(master_id)
                 events_list.append(event)
                 master_ids_deleted.add(master_id)
 

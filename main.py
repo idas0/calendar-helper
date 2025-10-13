@@ -30,6 +30,7 @@ def run_chat_agent():
         "When calculating dates, assume the current date and time are used as the reference point. "
         "End time for event creation is optional"
         "At the end of each operation, get back to the user with confirmation or error message"
+        f"At all costs try to create events with as little information as possible (for example, don't ask for the end time if not provided, don't ask for the year because you already have it ({get_current_datetime()}))"
     )
 
     model = genai.GenerativeModel('gemini-2.5-flash-lite',
@@ -47,7 +48,7 @@ def run_chat_agent():
             
             response = chat.send_message(user_input)
             
-            print(f"Agent: {response.text}")
+            print(f"Agent: {response.text if text in response else ""}")
             
         except Exception as e:
             print(f"\nAn unexpected error occurred: {e}")
