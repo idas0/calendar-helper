@@ -133,12 +133,10 @@ def find_and_delete_events_by_summary(
     """
     service = get_calendar_service()
     
-    # We use a set to track master IDs we've already handled
     master_ids_deleted = set()
     events_list = []
     
     try:
-        # Step 1: Search for the events, expanding recurring events
         now = datetime.datetime.now(tz=pytz.timezone(TIMEZONE)).isoformat()
         
         events_result = service.events().list(
@@ -201,7 +199,6 @@ def list_all_calendars() -> str:
     service = get_calendar_service()
     
     try:
-        # Call the CalendarList API
         calendars_result = service.calendarList().list().execute()
         calendars = calendars_result.get('items', [])
 
