@@ -1,7 +1,5 @@
 import os
-import json
 import google.generativeai as genai
-from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
 from calendar_functions import (
@@ -48,7 +46,7 @@ def run_chat_agent():
             
             response = chat.send_message(user_input)
             
-            print(f"Agent: {response.text if text in response else ""}")
+            print(f"Agent: {response.text if hasattr(response, 'text') else ""}")
             
         except Exception as e:
             print(f"\nAn unexpected error occurred: {e}")
